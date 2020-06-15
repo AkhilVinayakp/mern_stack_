@@ -28,7 +28,7 @@ let UserSchema = new schema({
 
 
     // need to be updated
-    password:{
+    enc_password:{
         type:String,
         trim:true
     },
@@ -43,6 +43,16 @@ let UserSchema = new schema({
     }
 
 });
+//creating the schema methods
+UserSchema.method={
+    sec_password: function (plain_password) {
+        return  crypto.createHmac('sha256', this.salt)
+            .update(plain_password)
+            .digest('hex');
+    }
+}
+
+
 
 // exporting the model using the schema created
 module.exports = mongoose.model("user",UserSchema)
