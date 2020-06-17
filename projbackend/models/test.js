@@ -38,7 +38,6 @@ console.log(rm.lastname)
  */
 
 /* extended testing for schema methods and static methods
- */
 
 const mongoose = require("mongoose")
 const testSchema = mongoose.Schema({
@@ -58,7 +57,7 @@ testSchema.method("wishyou",function () {
     return "good morning "+ this.name
 })
 
- */
+
 
 testSchema.method={
     test:function () {
@@ -73,6 +72,51 @@ let me = new model({name:"Akhil", password: "vinayak"})
 console.log(me.name)
 console.log(me.test)
 
+ */
+/*
+test for setting the virtual password field
 
 
+ */
 
+const mongoose = require("mongoose")
+const crypto = require("crypto")
+const uuid = require("uuid/v1")
+
+const schema = new mongoose.Schema({
+    name :{
+        type:String,
+        trim:true,
+        required:true
+    },
+    sec_password:{
+        type:String,
+        required: true
+    },
+    salt:String
+
+})
+//adding the test method to encrypt the password
+schema.method("encrypt_it",function (plain_password) {
+    if(!plain_password) return ""
+    try {
+        this.salt = uuid()
+        return crypto.createHmac("sha256",this.salt).update(plain_password).digest("hex")
+    }
+    catch (e) {
+        return ""
+    }
+})
+schema.virtual("password")
+    .set(function (password) {
+        this._pass = this.encrypt_it(password);
+    })
+    .get(function () {
+        return this._pass;
+    })
+
+let model = mongoose.model("nm",schema)
+let me = new model({name:"Akhil", password: "vinayak"})
+console.log(me.name)
+console.log(me.password)
+console.log(me.salt)
