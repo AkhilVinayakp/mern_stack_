@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
     },
     category:{
         ref:"Category",
-        type:ObjectIdb,
+        type:ObjectId,
         required:true
     },
     stock: Number,
@@ -31,4 +31,6 @@ const productSchema = new mongoose.Schema({
         contentType:String
     }
 
-});
+},{timestamp:true});
+
+module.exports = mongoose.model("product",productSchema)
