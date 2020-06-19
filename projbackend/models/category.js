@@ -8,6 +8,6 @@ const categorySchema = new mongoose.Schema({
         //making unique
         unique:true
     }
-},{timestamp:true});
+},{timestamps:true});
 
 module.exports = mongoose.model("Category",categorySchema)
