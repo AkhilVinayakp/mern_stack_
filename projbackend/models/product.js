@@ -31,6 +31,6 @@ const productSchema = new mongoose.Schema({
         contentType:String
     }
 
-},{timestamp:true});
+},{timestamps:true});
 
 module.exports = mongoose.model("product",productSchema)

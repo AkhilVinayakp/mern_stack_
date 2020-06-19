@@ -43,7 +43,7 @@ let UserSchema = new mongoose.Schema({
         default: []
     }
 
-},{timestamp:true});
+},{timestamps:true});
 //creating the schema methods
 //TODO schema testing
 
