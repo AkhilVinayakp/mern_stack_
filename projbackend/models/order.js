@@ -8,12 +8,21 @@ product_in_cart: product in cart required additional data such as the quantity >
 const mongoose = require("mongoose")
 const {ObjectId} = mongoose.Schema.ObjectId;
 
+const productCart = new mongoose.Schema({
+    products:{
+        type:ObjectId,
+        ref:"product"
+    },
+    name:String,
+    count:Number,
+    price:Number
+},{timestamps:true});
 
-
+module.exports = mongoose.model("productCart",productCart)
 
 
 // adding the orderSchema
-//TODO need to  add productCart schema
+//
 const orderSchema = new mongoose.Schema({
     order:[productCart],
     transactionId:{},
@@ -24,4 +33,6 @@ const orderSchema = new mongoose.Schema({
         type:ObjectId,
         ref:"user"
     }
-},{timestamp:true})
+},{timestamps:true});
+
+module.exports = mongoose.model("order",orderSchema);
