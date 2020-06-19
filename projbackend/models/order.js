@@ -1,0 +1,27 @@
+// required two schemas
+/*
+orderschema : Place orders multiple order may be made by the user
+            adding additional data of the user
+product_in_cart: product in cart required additional data such as the quantity >
+ */
+
+const mongoose = require("mongoose")
+const {ObjectId} = mongoose.Schema.ObjectId;
+
+
+
+
+
+// adding the orderSchema
+//TODO need to  add productCart schema
+const orderSchema = new mongoose.Schema({
+    order:[productCart],
+    transactionId:{},
+    amount:Number,
+    address:String,
+    update:Date,// when ever an update made by the admin
+    user:{
+        type:ObjectId,
+        ref:"user"
+    }
+},{timestamp:true})
