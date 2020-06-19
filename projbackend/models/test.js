@@ -77,8 +77,6 @@ console.log(me.test)
 test for setting the virtual password field
 
 
- */
-
 const mongoose = require("mongoose")
 const crypto = require("crypto")
 const uuid = require("uuid/v1")
@@ -109,10 +107,11 @@ schema.method("encrypt_it",function (plain_password) {
 })
 schema.virtual("password")
     .set(function (password) {
-        this._pass = this.encrypt_it(password);
+        this._pass = password
+        this.sec_password = this.encrypt_it(this._pass);
     })
     .get(function () {
-        return this._pass;
+        return this.sec_password;
     })
 
 let model = mongoose.model("nm",schema)
@@ -120,3 +119,10 @@ let me = new model({name:"Akhil", password: "vinayak"})
 console.log(me.name)
 console.log(me.password)
 console.log(me.salt)
+
+ */
+
+/*
+testing for category.js file on 18-06-2020
+ */
+
