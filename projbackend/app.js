@@ -1,4 +1,5 @@
 //
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -7,10 +8,10 @@ const app = express();
 
 
 //assigning the port to run TODO change
-const port =8000;
+const port =process.env.PORT;
 
 //creating the connection with mongodb
-mongoose.connect("mongodb://localhost:27017/test",{
+mongoose.connect(process.env.DATABASE,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true
