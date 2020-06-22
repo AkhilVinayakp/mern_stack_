@@ -2,6 +2,8 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+
+
 //adding the installed middleware
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -14,8 +16,10 @@ app.use(bodyParser.json());// parsing using json data
 app.use(cookieParser());
 app.use(cors());
 
+
 //assigning the port to run TODO change
 const port =process.env.PORT;
+
 
 //creating the connection with mongodb
 mongoose.connect(process.env.DATABASE,{
@@ -27,6 +31,11 @@ mongoose.connect(process.env.DATABASE,{
 }).catch(reason => {
     console.log(`error \n ${reason}`);
 });
+
+
+//creating routes
+app.use("/api",routeAuth);
+
 
 
 
