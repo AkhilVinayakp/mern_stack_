@@ -9,6 +9,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
+//importing the routes
+const authRoutes = require("./routes/auth");
+
 // creating the express app
 const app = express();
 // adding the middleware bodyparser
@@ -34,7 +37,7 @@ mongoose.connect(process.env.DATABASE,{
 
 
 //creating routes
-app.use("/api",routeAuth);
+app.use("/auth",authRoutes);
 
 
 
