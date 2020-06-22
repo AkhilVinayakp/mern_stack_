@@ -2,10 +2,17 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+//adding the installed middleware
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 // creating the express app
 const app = express();
-
+// adding the middleware bodyparser
+app.use(bodyParser.json());// parsing using json data
+app.use(cookieParser());
+app.use(cors());
 
 //assigning the port to run TODO change
 const port =process.env.PORT;
