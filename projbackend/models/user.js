@@ -47,7 +47,7 @@ let UserSchema = new mongoose.Schema({
 //creating the schema methods
 //TODO schema testing
 
-UserSchema.method={
+UserSchema.methods={
     authenticate: function(plain_password){
         return this.sec_password(plain_password) === this.enc_password
     },
