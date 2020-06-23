@@ -26,12 +26,10 @@ let UserSchema = new mongoose.Schema({
         maxlength:67,
         trim:true
     },
-
-
-    // need to be updated
     enc_password:{
         type:String,
-        trim:true
+        trim:true,
+        required:true
     },
     salt : String,
     role:{
@@ -49,7 +47,7 @@ let UserSchema = new mongoose.Schema({
 
 UserSchema.methods={
     authenticate: function(plain_password){
-        return this.sec_password(plain_password) === this.enc_password
+        return this.sec_password(plain_password) === this.enc_password;
     },
     sec_password: function (plain_password) {
         if (!plain_password) return "";
@@ -66,6 +64,7 @@ UserSchema.methods={
 }
 // setting up the virtual fild for password encryption
 UserSchema.virtual("password").set(function (password) {
+    this.salt=uuid();
     this.enc_password = this.sec_password(password)
 }).get(function () {
     return this.enc_password;
