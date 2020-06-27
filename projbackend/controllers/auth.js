@@ -4,7 +4,9 @@ const { validationResult } = require("express-validator")
 const jwt = require("jsonwebtoken");
 const expressJwt =require("express-jwt");
 
+//sign_out handler ***********************************************************************************
 exports.sign_out = (req,res)=>{
+    res.clearCookie("token");
     res.json({
         message:"sign out successfully"
     })
