@@ -42,7 +42,7 @@ exports.sign_in=function (req,res) {
     //destructuring the request.body
     const {email, password} = req.body;
     User.findOne({email},(err,user)=>{
-        if(err)
+        if(err || !user)
             return res.status(200).json({
                 error:"email does not exist"
             })
