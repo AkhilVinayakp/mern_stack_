@@ -49,7 +49,7 @@ exports.sign_in=function (req,res) {
                 error:"email does not exist"
             })
         if(!user.authenticate(password)){
-            return res.status(402).json({
+            return res.status(422).json({
                 error:"email password mismatch"
             });
             }
@@ -66,3 +66,9 @@ exports.sign_in=function (req,res) {
     })
 
 }
+
+//secuiring route
+exports.secured=expressJwt({
+    secret:process.env.SECRET,
+    userProperty:"auth"
+})
