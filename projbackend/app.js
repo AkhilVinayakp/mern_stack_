@@ -11,6 +11,7 @@ const cors = require("cors");
 
 //importing the routes
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
 // creating the express app
 const app = express();
@@ -38,6 +39,7 @@ mongoose.connect(process.env.DATABASE,{
 
 //creating routes
 app.use("/auth",authRoutes);
+app.use("/user",userRoutes);
 
 
 
