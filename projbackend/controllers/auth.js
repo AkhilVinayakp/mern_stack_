@@ -67,7 +67,15 @@ exports.sign_in=function (req,res) {
 
 }
 
-//secuiring route 
+//secuiring route
+exports.secured  = (req,res,next)=> {
+    
+    next();
+}
+
+
+
+
 // checking for the user is signed in with a proper token
 
 exports.isSigned = expressJwt({
@@ -75,11 +83,13 @@ exports.isSigned = expressJwt({
     userProperty:"auth" // this auth is added to the req object
     // ie  
     // req.auth contains the _id of the purticular user >>>  req.auth._id
-});
+})
 
 // custom middleware for checking the user authenticated
 
+
 exports.isAuthenticated = (req, res, next) =>{
+  
     // check the first middleware passed ie auth property has been set 
     // user is loged in and req.profile set by the front end
     let checker=req.auth&& req.profile && req.profile._id === req.auth._id
@@ -92,23 +102,19 @@ exports.isAuthenticated = (req, res, next) =>{
 }
 
 // checking for is an admin
-exports.isAdmin= (req,res,next)=> {
-    if(!res.auth) { 
-        return res.status(403).json({error:"not signed in"})
+exports.isAdmin = (req,res,next) => {
+    // check the role of the user 
+    // two ways 1. profile.role ===1 
+    //          2.pass the auth_id and get the role of the user from server and validate it
+    // code in lco
+    /*
+        if(req.progule.role === 0){
+            res.status(403).json({
+            error:"not admin"
 
-    }
-    User.findById({_id:req.auth._id}, (err,user)=> {
-
-         if(err || !user)
-            return res.status(400).json({
-                error:"bad request"
             })
-        if(user.role != 1){ // admin assigned with a role of 1
-            return res.status(403).json({
-                error:"YOU ARE not ADMIN , ACCESS DENIED"
-            });
         }
-    }
-        next();
 
+    */
+    next();
 }

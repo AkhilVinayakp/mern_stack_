@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 // adding the controllers to handle the routes
-const { sign_out, sign_up, sign_in, secured } = require("../controllers/auth");
+const { sign_out, sign_up, sign_in, secured, isSigned, isAuthenticated , isAdmin} = require("../controllers/auth");
 // applying validation
 const { check } = require("express-validator");
 
@@ -20,7 +20,7 @@ router.post("/sign_in",[
 
 
 // test route : secuiring routes
-router.get("/test", secured, (req,res)=>{
+router.get("/test",[secured, isSigned, isAdmin], (req,res)=>{
 	res.send("testing secured")
 })
 
