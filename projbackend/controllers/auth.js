@@ -67,8 +67,26 @@ exports.sign_in=function (req,res) {
 
 }
 
-//secuiring route
-exports.secured=expressJwt({
+//secuiring route 
+// checking for the user is signed in with a proper token
+
+exports.isSigned = expressJwt({
     secret:process.env.SECRET,
-    userProperty:"auth"
-})
+    userProperty:"auth" // this auth is added to the req object
+    // ie  
+    // req.auth contains the _id of the purticular user >>>  req.auth._id
+});
+
+// custom middleware for checking the user authenticated
+
+exports.isAuthenticated = (req, res, next) =>{
+    // check the first middleware passed ie auth property has been set 
+    // user is loged in and req.profile set by the front end
+    let checker=req.auth._id && req.profile && req.auth && req.profile._id === req.auth._id
+    if(!checker){
+        return res.status(403).json({
+            "message":" ACCESS DENIED!"
+        })
+    }
+    next()
+}
