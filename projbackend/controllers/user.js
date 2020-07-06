@@ -1,5 +1,5 @@
 // importing the model
-const User = require("../model/user");
+const User = require("../models/user");
 
 //controller to handle the params 
 exports.get_UserById = (req,res,next,id) =>{
