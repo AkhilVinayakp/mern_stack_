@@ -36,5 +36,25 @@ exports.getAllUsers = (req,res) =>{
 }
 */
 exports.updateUser = (req,res)=>{
-	
+	User.findByIdAndUpdate(
+		req.profile.id,
+		{
+			$set:req.body
+		},
+		{
+			new:true,
+			useFindAndModify:false
+		}
+	).exec((err,user)=>{
+		if(err){
+			return res.status(400).json({
+				error:"can not update user internel server error unautherized!"
+			})
+		}
+		user.salt = undefined;
+		user.enc_password = undefined;
+		user.createdAt =undefined;
+		user.updatedAt = undefined;
+		res.json(user)
+	})
 }
