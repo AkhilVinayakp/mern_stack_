@@ -92,8 +92,8 @@ exports.isAuthenticated = (req, res, next) =>{
   
     // check the first middleware passed ie auth property has been set 
     // user is loged in and req.profile set by the front end
-    console.log(req.auth.id);
-    console.log(req.profile.id)
+    //console.log(req.auth.id);
+    //console.log(req.profile.id)
     let checker=req.profile && req.auth && req.profile.id == req.auth.id
     if(!checker){
         return res.status(403).json({
