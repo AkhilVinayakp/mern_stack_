@@ -26,10 +26,15 @@ exports.getUser = (req,res) =>{
 
 }
 //remove the following getAllUsers handler >> testing purpose only
+/*
 exports.getAllUsers = (req,res) =>{
 	User.find().exec((err,users)=>{
 		res.json({
 			users:users
 		})
 	})
+}
+*/
+exports.updateUser = (req,res)=>{
+	
 }
