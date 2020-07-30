@@ -26,7 +26,7 @@ exports.getUser = (req,res) =>{
 
 }
 //remove the following getAllUsers handler >> testing purpose only
-/*
+
 exports.getAllUsers = (req,res) =>{
 	User.find().exec((err,users)=>{
 		res.json({
@@ -34,7 +34,7 @@ exports.getAllUsers = (req,res) =>{
 		})
 	})
 }
-*/
+
 exports.updateUser = (req,res)=>{
 	User.findByIdAndUpdate(
 		req.profile.id,
