@@ -77,4 +77,7 @@ exports.orderedList = (res,req) =>{
 			return res.json(order);
 		})
 }
-// writting the middleware to push the details into the purchases list of the user wh
+// writting the middleware to push the details into the purchases list of the user when the made a purchase
+exports.push_purchased = (req, res, next)=>{
+	// TODo front end data store
+}
