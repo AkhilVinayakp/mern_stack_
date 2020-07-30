@@ -1,5 +1,7 @@
 // importing the model
 const User = require("../models/user");
+// importing the order model 
+const Order = require("../models/order")
 
 //controller to handle the params 
 exports.get_UserById = (req,res,next,id) =>{
@@ -58,3 +60,21 @@ exports.updateUser = (req,res)=>{
 		res.json(user)
 	})
 }
+
+// viewing all the ordered list placed by list
+exports.orderedList = (res,req) =>{
+	Order.find({user: req.profile.id})
+		 .populate({
+		 	path:user,
+		 	select:'name'
+		 })
+		.exec((err, order)=>{
+			if(err){
+				return res.status(400).json({
+					error:"no data available right now!"
+				})
+			}
+			return res.json(order);
+		})
+}
+// writting the middleware to push the details into the purchases list of the user wh
