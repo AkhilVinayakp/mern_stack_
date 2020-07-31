@@ -30,3 +30,24 @@ exports.createCategory = (req,res)=>{
     //    return the created category..
     })
 }
+
+
+//*****************************Return a category data by specifying the id: get_Category********************************
+// route category/:cat_id
+exports.get_Category = (req, res)=>{
+    return res.json(req.category);
+}
+
+//***************************** Returning all the categories in the database : getAllCategories ************************
+//route /categories
+exports.getAllCategories = (req, res)=>{
+    Category.find().exec((err,categories)=>{
+        if(err){
+            res.status(400).json({
+                error:"Server internal  Error",
+                obj:err
+            })
+        }
+        res.json(categories);
+    })
+}
